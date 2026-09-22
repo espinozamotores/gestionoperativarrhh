@@ -12,45 +12,47 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      const result = await sql.query(`SELECT * FROM ${table} ORDER BY id DESC`);
-      return res.status(200).json(result.rows);
+      const rows = await sql(`SELECT * FROM ${table} ORDER BY id DESC`);
+      return res.status(200).json(rows);
     }
 
     if (req.method === 'POST') {
       const body = req.body;
-      let result;
+      let rows;
 
       if (table === 'asistencia') {
         const { nombre, tipo, hora, retraso } = body;
-        result = await sql`
-          INSERT INTO asistencia (nombre, tipo, hora, retraso)
-          VALUES (${nombre}, ${tipo}, ${hora}, ${retraso || 0})
-          RETURNING *`;
+        rows = await sql(
+          `INSERT INTO asistencia (nombre, tipo, hora, retraso) VALUES ($1, $2, $3, $4) RETURNING *`,
+          [nombre, tipo, hora, retraso || 0]
+        );
       } else if (table === 'quejas') {
         const { cliente, descripcion, severidad } = body;
-        result = await sql`
-          INSERT INTO quejas (cliente, descripcion, severidad)
-          VALUES (${cliente}, ${descripcion}, ${severidad})
-          RETURNING *`;
+        rows = await sql(
+          `INSERT INTO quejas (cliente, descripcion, severidad) VALUES ($1, $2, $3) RETURNING *`,
+          [cliente, descripcion, severidad]
+        );
       } else if (table === 'opiniones') {
         const { cliente, puntaje, comentario } = body;
-        result = await sql`
-          INSERT INTO opiniones (cliente, puntaje, comentario)
-          VALUES (${cliente}, ${puntaje}, ${comentario || 'Sin comentario'})
-          RETURNING *`;
+        rows = await sql(
+          `INSERT INTO opiniones (cliente, puntaje, comentario) VALUES ($1, $2, $3) RETURNING *`,
+          [cliente, puntaje, comentario || 'Sin comentario']
+        );
       }
-      return res.status(200).json(result.rows[0]);
+      return res.status(200).json(rows[0]);
     }
 
     if (req.method === 'PATCH' && table === 'quejas') {
       const { id, resuelta } = req.body;
-      const result = await sql`
-        UPDATE quejas SET resuelta = ${resuelta} WHERE id = ${id} RETURNING *`;
-      return res.status(200).json(result.rows[0]);
+      const rows = await sql(
+        `UPDATE quejas SET resuelta = $1 WHERE id = $2 RETURNING *`,
+        [resuelta, id]
+      );
+      return res.status(200).json(rows[0]);
     }
 
     if (req.method === 'DELETE') {
-      await sql.query(`DELETE FROM ${table}`);
+      await sql(`DELETE FROM ${table}`);
       return res.status(200).json({ ok: true });
     }
 
