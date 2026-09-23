@@ -9,41 +9,60 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
-  body { margin:0; background:#F3F4F5; font-family:'IBM Plex Sans', system-ui, sans-serif; color:#14181C; }
-  a { color:#10314F; }
+  body {
+    margin:0; min-height:100vh; font-family:'IBM Plex Sans', system-ui, sans-serif; color:#F2F6F8;
+    background:
+      radial-gradient(760px 520px at 12% -6%, rgba(51,196,166,0.30), transparent 62%),
+      radial-gradient(880px 600px at 96% 8%, rgba(56,122,214,0.28), transparent 64%),
+      radial-gradient(720px 620px at 72% 104%, rgba(31,111,92,0.26), transparent 66%),
+      linear-gradient(168deg, #081726 0%, #0B2239 46%, #0C2B33 100%);
+    background-attachment:fixed;
+  }
+  ::placeholder { color:#8FA0AD; }
+  a { color:#7DE8CE; }
   input, select, textarea, button { font-family:inherit; }
   h1,h2,h3 { font-family:'IBM Plex Serif', Georgia, serif; margin:0; }
   .layout { display:flex; flex-wrap:wrap; min-height:100vh; align-items:stretch; }
-  .sidebar { width:250px; flex:0 1 250px; min-width:190px; background:#0B2239; color:#E9ECEF; padding:26px 18px; display:flex; flex-direction:column; gap:26px; }
-  .sidebar nav button { display:flex; align-items:center; gap:10px; width:100%; text-align:left; border:0; cursor:pointer; padding:11px 12px; border-radius:2px; font-size:14.5px; font-weight:600; }
-  .sidebar nav button:hover { background:#14314D; color:#fff; }
-  .dot { width:6px; height:6px; display:inline-block; }
+  .glass { background:rgba(255,255,255,0.075); backdrop-filter:blur(22px) saturate(140%); -webkit-backdrop-filter:blur(22px) saturate(140%); border:1px solid rgba(255,255,255,0.16); box-shadow:0 18px 44px rgba(4,14,26,0.34), inset 0 1px 0 rgba(255,255,255,0.22); border-radius:12px; }
+  .sidebar { width:250px; flex:0 1 250px; min-width:190px; background:rgba(255,255,255,0.055); backdrop-filter:blur(26px) saturate(150%); -webkit-backdrop-filter:blur(26px) saturate(150%); border-right:1px solid rgba(255,255,255,0.14); color:#EAF0F4; padding:26px 18px; display:flex; flex-direction:column; gap:26px; }
+  .sidebar nav button { display:flex; align-items:center; gap:10px; width:100%; text-align:left; border:0; cursor:pointer; padding:11px 12px; border-radius:12px; font-size:14.5px; font-weight:600; }
+  .sidebar nav button:hover { background:rgba(255,255,255,0.1); color:#fff; }
+  .dot { width:6px; height:6px; display:inline-block; border-radius:50%; }
   main { flex:1 1 420px; min-width:0; padding:30px clamp(18px,3vw,40px) 60px; display:flex; flex-direction:column; gap:26px; }
-  header.top { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; border-bottom:1px solid #DCE0E5; padding-bottom:22px; }
-  .kicker { font-size:12.5px; letter-spacing:0.09em; text-transform:uppercase; color:#6E7883; font-weight:600; }
-  .card { background:#FFFFFF; border:1px solid #DCE0E5; border-radius:2px; padding:22px; }
+  header.top { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; border-bottom:1px solid rgba(255,255,255,0.16); padding-bottom:22px; }
+  .kicker { font-size:12.5px; letter-spacing:0.09em; text-transform:uppercase; color:#AEBCC6; font-weight:600; }
+  .card { padding:22px; }
   .kpi { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
   .kpi .card { padding:20px 22px; display:flex; flex-direction:column; gap:8px; }
   .kpi .val { font-family:'IBM Plex Serif', Georgia, serif; font-size:32px; font-weight:700; }
   .menuCards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
-  .menuCards button { text-align:left; cursor:pointer; background:#fff; border:1px solid #DCE0E5; border-radius:2px; padding:22px; display:flex; flex-direction:column; gap:10px; }
-  .menuCards button:hover { border-color:#1F6F5C; background:#F7F8F9; }
-  label { display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:600; color:#414A54; }
-  input[type=text], input[type=time], textarea { padding:11px 12px; border:1px solid #CDD3D9; border-radius:2px; font-size:14.5px; font-weight:400; color:#14181C; }
-  .btn-primary { cursor:pointer; border:0; border-radius:2px; padding:12px; background:#10314F; color:#fff; font-size:14.5px; font-weight:600; }
-  .btn-primary:hover { background:#0B2239; }
-  .btn-outline { cursor:pointer; border:1px solid #CDD3D9; background:#fff; border-radius:2px; padding:12px 20px; font-size:14.5px; font-weight:600; color:#414A54; }
-  .btn-outline:hover { border-color:#1F6F5C; color:#1F6F5C; }
-  .row { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; padding:12px 14px; border:1px solid #E7EAEE; border-radius:2px; background:#fff; }
-  .pill { font-size:13px; font-weight:600; padding:5px 10px; border-radius:2px; }
+  .menuCards button { text-align:left; cursor:pointer; padding:22px; display:flex; flex-direction:column; gap:10px; color:#F2F6F8; font-family:inherit; }
+  .menuCards button:hover { border-color:#7DE8CE; background:rgba(255,255,255,0.13); }
+  label { display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:600; color:#D6DFE6; }
+  input[type=text], input[type=time], textarea { padding:11px 12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#F2F6F8; border-radius:12px; font-size:14.5px; font-weight:400; }
+  textarea { resize:vertical; }
+  .btn-primary { cursor:pointer; border:0; border-radius:12px; padding:12px; background:#33C4A6; color:#06222B; font-size:14.5px; font-weight:600; }
+  .btn-primary:hover { background:#4AD4B7; }
+  .btn-outline { cursor:pointer; border:1px solid rgba(255,255,255,0.28); background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 20px; font-size:14.5px; font-weight:600; color:#EAF0F4; }
+  .btn-outline:hover { background:rgba(255,255,255,0.14); }
+  .row { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; padding:12px 14px; border:1px solid rgba(255,255,255,0.12); border-radius:12px; background:rgba(255,255,255,0.05); }
+  .pill { font-size:13px; font-weight:600; padding:5px 10px; border-radius:8px; }
   .flexcols { display:flex; flex-wrap:wrap; gap:22px; align-items:flex-start; }
   .col1 { flex:1 1 300px; min-width:280px; display:flex; flex-direction:column; gap:16px; }
   .col2 { flex:2 1 360px; min-width:280px; display:flex; flex-direction:column; gap:14px; }
-  .muted { color:#8A939C; font-size:14px; }
-  .sevbtn, .ptbtn { flex:1; cursor:pointer; padding:10px 0; border-radius:2px; border:1px solid #CDD3D9; background:#fff; color:#414A54; font-size:14.5px; font-weight:600; }
-  .sevbtn.active, .ptbtn.active { background:#10314F; color:#fff; border-color:#10314F; }
-  .ptbtn.active { background:#1F6F5C; border-color:#1F6F5C; }
-  @media print { body * { visibility:hidden; } #reporte-pdf, #reporte-pdf * { visibility:visible; } #reporte-pdf { position:absolute; left:0; top:0; width:100%; } .no-print { display:none !important; } }
+  .muted { color:#9AA9B4; font-size:14px; }
+  .sevbtn, .ptbtn, .moodbtn { flex:1; cursor:pointer; padding:10px 4px; border-radius:12px; border:1px solid rgba(255,255,255,0.22); background:rgba(255,255,255,0.08); color:#EAF0F4; font-size:13.5px; font-weight:600; }
+  h2 { font-size:17px; font-weight:700; }
+  #reporte-pdf, #reporte-pdf * { color:#14181C !important; }
+  #reporte-pdf { background:#FFFFFF; border:1px solid #DCE0E5; border-radius:2px; backdrop-filter:none; }
+  #reporte-pdf h2, #reporte-pdf .kicker { color:#0B2239 !important; }
+  @media print {
+    body { background:#fff !important; }
+    body * { visibility:hidden; }
+    #reporte-pdf, #reporte-pdf * { visibility:visible; }
+    #reporte-pdf { position:absolute; left:0; top:0; width:100%; box-shadow:none !important; }
+    .no-print { display:none !important; }
+  }
 </style>
 </head>
 <body>
@@ -53,256 +72,319 @@
 const API = '/api/data';
 const HORA_LIMITE = '09:00';
 const UMBRAL_URGENCIA = 4;
+const MIN_ESCALADA = 30;
+const PUNTOS_POR_ENTRADA = 10;
+const UMBRAL_RETRASO = 50;
+const BENEFICIOS = [
+  { key:'medio-dia', nombre:'Medio día libre', costo:150 },
+  { key:'flex', nombre:'Flexibilidad horaria (1 semana)', costo:80 }
+];
 
 const state = {
-  view: 'menu',
-  asistencia: [], quejas: [], opiniones: [],
-  fAsisNombre: '', fAsisHora: '',
-  fQuejaCliente: '', fQuejaTexto: '', fQuejaSev: 3,
-  fOpiCliente: '', fOpiTexto: '', fOpiPuntaje: 4,
-  asisMsg: '', reloj: '', periodo: 'dia', cargando: true
+  view:'menu', cargando:true,
+  asistencia:[], quejas:[], opiniones:[], canjes:[], animos:[],
+  fAsisNombre:'', fAsisCargo:'', fAsisHora:'', fMood:'',
+  fQuejaCliente:'', fQuejaTexto:'', fQuejaSev:3,
+  fOpiCliente:'', fOpiTexto:'', fOpiPuntaje:4,
+  asisMsg:'', canjeMsg:'', empSel:'',
+  lluvia:true, trafico:false, periodo:'dia', reloj:'', copiado:0
 };
 
 const sevLabels = {1:'Leve',2:'Menor',3:'Moderada',4:'Alta',5:'Crítica'};
 const puntLabels = {1:'Muy insatisfecho',2:'Insatisfecho',3:'Neutral',4:'Satisfecho',5:'Muy satisfecho'};
-const sevColor = n => n>=5 ? ['#F5EBE8','#8C2F2A'] : n===4 ? ['#F6F0E6','#8A5A20'] : n===3 ? ['#F2EFE4','#6E5A20'] : ['#EDEFF1','#4A5560'];
+const sevColor = n => n>=5 ? ['rgba(232,110,98,0.22)','#F5A79F'] : n===4 ? ['rgba(240,176,92,0.2)','#F3C486'] : n===3 ? ['rgba(214,196,138,0.18)','#E3D29A'] : ['rgba(255,255,255,0.12)','#C2CED7'];
+const medallaColor = m => m==='Oro' ? ['rgba(240,196,92,0.22)','#F7DA9A'] : m==='Plata' ? ['rgba(214,226,235,0.2)','#DCE7EE'] : m==='Bronce' ? ['rgba(201,124,74,0.22)','#E8B18A'] : ['rgba(255,255,255,0.1)','#AEBCC6'];
+const moodColor = m => m==='Motivado' ? '#7DE8CE' : m==='Neutro' ? '#8FC4FF' : '#F3C486';
 const toMin = h => Number(String(h).slice(0,2))*60 + Number(String(h).slice(3,5));
 const fechaFmt = ts => new Date(ts).toLocaleDateString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric'});
+const dayKey = ts => new Date(ts).toISOString().slice(0,10);
 
-async function apiGet(table) {
-  const r = await fetch(`${API}?table=${table}`);
-  return r.json();
-}
-async function apiPost(table, body) {
-  const r = await fetch(`${API}?table=${table}`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
-  return r.json();
-}
-async function apiPatch(table, body) {
-  const r = await fetch(`${API}?table=${table}`, {method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
-  return r.json();
-}
-async function apiDelete(table) {
-  await fetch(`${API}?table=${table}`, {method:'DELETE'});
-}
+async function apiGet(table){ const r = await fetch(`${API}?table=${table}`); return r.json(); }
+async function apiPost(table, body){ const r = await fetch(`${API}?table=${table}`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}); return r.json(); }
+async function apiPatch(table, body){ const r = await fetch(`${API}?table=${table}`, {method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}); return r.json(); }
+async function apiDelete(table){ await fetch(`${API}?table=${table}`, {method:'DELETE'}); }
 
-async function cargarTodo() {
+async function cargarTodo(){
   state.cargando = true; render();
-  const [asis, quej, opi] = await Promise.all([apiGet('asistencia'), apiGet('quejas'), apiGet('opiniones')]);
-  state.asistencia = asis; state.quejas = quej; state.opiniones = opi;
-  state.cargando = false;
-  render();
+  const [asis, quej, opi, canj, anim] = await Promise.all([apiGet('asistencia'), apiGet('quejas'), apiGet('opiniones'), apiGet('canjes'), apiGet('animos')]);
+  state.asistencia = asis; state.quejas = quej; state.opiniones = opi; state.canjes = canj; state.animos = anim;
+  state.cargando = false; render();
 }
 
-function setView(v) { state.view = v; state.asisMsg = ''; render(); }
+function setView(v){ state.view = v; state.asisMsg=''; render(); }
 
-async function marcar(tipo) {
-  const nombre = (state.fAsisNombre || '').trim();
-  if (!nombre) { state.asisMsg = 'Ingresa el nombre del colaborador.'; render(); return; }
+async function marcar(tipo){
+  const nombre = (state.fAsisNombre||'').trim();
+  if (!nombre){ state.asisMsg='Ingresa el nombre del colaborador.'; render(); return; }
+  if (tipo==='ENTRADA' && !state.fMood){ state.asisMsg='Elige tu estado de ánimo (es anónimo) antes de confirmar.'; render(); return; }
   const hora = state.fAsisHora || state.reloj;
+  const prev = state.asistencia.find(r => r.nombre.toLowerCase() === nombre.toLowerCase());
+  const cargo = (state.fAsisCargo||'').trim() || (prev && prev.cargo) || 'Sin área';
   let retraso = 0;
-  if (tipo === 'ENTRADA') {
-    const diff = toMin(hora) - toMin(HORA_LIMITE);
-    if (diff > 0) retraso = diff;
-  }
-  const nuevo = await apiPost('asistencia', {nombre, tipo, hora, retraso});
+  if (tipo==='ENTRADA'){ const diff = toMin(hora) - toMin(HORA_LIMITE); if (diff>0) retraso = diff; }
+  const nuevo = await apiPost('asistencia', {nombre, cargo, tipo, hora, retraso});
   state.asistencia = [nuevo, ...state.asistencia];
-  state.fAsisNombre = '';
-  state.asisMsg = 'Registro guardado: ' + nombre + ' · ' + tipo + ' ' + hora + (retraso ? ' (retraso de ' + retraso + ' min)' : '');
+  if (tipo==='ENTRADA'){
+    const anim = await apiPost('animos', {cargo, mood: state.fMood});
+    state.animos = [anim, ...state.animos];
+  }
+  const gana = tipo==='ENTRADA' && !retraso;
+  state.fAsisNombre=''; state.fMood='';
+  state.asisMsg = 'Registro guardado: '+nombre+' · '+tipo+' '+hora+(retraso?' (retraso de '+retraso+' min)':gana?' · +'+PUNTOS_POR_ENTRADA+' puntos de puntualidad':'')+(tipo==='ENTRADA'?' · ánimo registrado de forma anónima':'');
   render();
 }
 
-async function registrarQueja() {
-  const cliente = (state.fQuejaCliente || '').trim();
-  const descripcion = (state.fQuejaTexto || '').trim();
-  if (!cliente || !descripcion) return;
-  const nueva = await apiPost('quejas', {cliente, descripcion, severidad: state.fQuejaSev});
+async function registrarQueja(){
+  const cliente=(state.fQuejaCliente||'').trim(), descripcion=(state.fQuejaTexto||'').trim();
+  if (!cliente||!descripcion) return;
+  const nueva = await apiPost('quejas', {cliente, descripcion, severidad:state.fQuejaSev});
   state.quejas = [...state.quejas, nueva].sort((a,b)=>b.severidad-a.severidad);
   state.fQuejaCliente=''; state.fQuejaTexto=''; state.fQuejaSev=3;
   render();
 }
 
-async function toggleQueja(id, resuelta) {
+async function toggleQueja(id, resuelta){
   const act = await apiPatch('quejas', {id, resuelta: !resuelta});
-  state.quejas = state.quejas.map(q => q.id === id ? act : q);
+  state.quejas = state.quejas.map(q => q.id===id ? act : q);
   render();
 }
 
-async function guardarOpinion() {
-  const cliente = (state.fOpiCliente || '').trim();
+async function guardarOpinion(){
+  const cliente=(state.fOpiCliente||'').trim();
   if (!cliente) return;
-  const comentario = (state.fOpiTexto || '').trim() || 'Sin comentario';
-  const nueva = await apiPost('opiniones', {cliente, puntaje: state.fOpiPuntaje, comentario});
+  const comentario=(state.fOpiTexto||'').trim()||'Sin comentario';
+  const nueva = await apiPost('opiniones', {cliente, puntaje:state.fOpiPuntaje, comentario});
   state.opiniones = [nueva, ...state.opiniones];
   state.fOpiCliente=''; state.fOpiTexto=''; state.fOpiPuntaje=4;
   render();
 }
 
-async function vaciarTodo() {
+function copiarAviso(q, mins, nivel){
+  const msg = '🔴 ESCALAMIENTO NIVEL '+(mins>=MIN_ESCALADA*2?'2':'1')+' · Queja crítica sin resolver\n'+
+    'Cliente: '+q.cliente+'\nSeveridad: 5 (crítica)\nAbierta hace: '+mins+' minutos\nDetalle: '+q.descripcion+
+    '\nAcción requerida: contactar al cliente y registrar la resolución en el sistema.';
+  navigator.clipboard && navigator.clipboard.writeText(msg);
+  state.copiado = q.id; render();
+}
+
+async function canjear(beneficio, empleados){
+  const e = empleados.find(x => x.nombre === state.empSel);
+  if (!e){ state.canjeMsg='Selecciona un colaborador de la lista.'; render(); return; }
+  if (e.saldo < beneficio.costo){ state.canjeMsg='Saldo insuficiente: '+e.saldo+' de '+beneficio.costo+' pts.'; render(); return; }
+  const nuevo = await apiPost('canjes', {nombre:e.nombre, beneficio:beneficio.nombre, costo:beneficio.costo});
+  state.canjes = [nuevo, ...state.canjes];
+  state.canjeMsg = 'Canje registrado: '+beneficio.nombre+' para '+e.nombre+' (-'+beneficio.costo+' pts).';
+  render();
+}
+
+async function vaciarTodo(){
   if (!confirm('¿Seguro que querés borrar todos los datos? Esta acción no se puede deshacer.')) return;
-  await Promise.all([apiDelete('asistencia'), apiDelete('quejas'), apiDelete('opiniones')]);
-  state.asistencia = []; state.quejas = []; state.opiniones = [];
+  await Promise.all(['asistencia','quejas','opiniones','canjes','animos'].map(apiDelete));
+  state.asistencia=[]; state.quejas=[]; state.opiniones=[]; state.canjes=[]; state.animos=[];
   setView('menu');
 }
 
-function calcAsisAll() {
+function calcAsisAll(){
   return state.asistencia.map(r => {
-    const estado = r.tipo !== 'ENTRADA' ? 'Salida registrada' : (r.retraso ? 'Retraso ' + r.retraso + ' min' : 'A tiempo');
+    const estado = r.tipo!=='ENTRADA' ? 'Salida registrada' : (r.retraso ? 'Retraso '+r.retraso+' min' : 'A tiempo');
     return {...r, estado};
   });
 }
 
-function viewMenu() {
+function calcEmpleados(){
   const asisAll = calcAsisAll();
-  const tarde = asisAll.filter(r => r.retraso > 0);
-  const pendientes = state.quejas.filter(q => !q.resuelta);
-  const urgentes = pendientes.filter(q => q.severidad >= UMBRAL_URGENCIA);
+  const entradas = asisAll.filter(r => r.tipo==='ENTRADA');
+  const nombres = [...new Set(entradas.map(r => r.nombre))];
+  return nombres.map(nombre => {
+    const regs = entradas.filter(r => r.nombre===nombre).sort((a,b)=> new Date(b.creado)-new Date(a.creado));
+    const aTiempo = regs.filter(r => !r.retraso);
+    const tardes = regs.filter(r => r.retraso>0);
+    const porDia = new Map();
+    regs.forEach(r => { const k=dayKey(r.creado); porDia.set(k, (porDia.get(k)||0)+(r.retraso>0?1:0)); });
+    const diasOrden = [...porDia.keys()].sort().reverse();
+    let racha=0;
+    for (let i=0;i<diasOrden.length;i++){
+      if (porDia.get(diasOrden[i])>0) break;
+      if (i>0){ const prev=new Date(diasOrden[i-1]+'T00:00:00Z').getTime(); const cur=new Date(diasOrden[i]+'T00:00:00Z').getTime(); if (prev-cur>86400000*1.5) break; }
+      racha++;
+    }
+    const medalla = racha>=8?'Oro':racha>=5?'Plata':racha>=3?'Bronce':'Sin medalla';
+    const ganados = aTiempo.length*PUNTOS_POR_ENTRADA + (racha>=3?20:0) + (racha>=5?30:0) + (racha>=8?50:0);
+    const gastados = state.canjes.filter(c => c.nombre===nombre).reduce((a,c)=>a+c.costo,0);
+    const tasaTarde = regs.length ? tardes.length/regs.length : 0;
+    const base = regs.length ? tasaTarde*100 : 12;
+    let prob = base - racha*2.5 + (state.lluvia?18:0) + (state.trafico?14:0);
+    prob = Math.max(2, Math.min(97, Math.round(prob)));
+    return { nombre, cargo: regs[0]?regs[0].cargo:'Sin área', marcaciones:regs.length, tardes:tardes.length,
+      racha, medalla, saldo: ganados-gastados, tasaTardeTexto: Math.round(tasaTarde*100)+'%', prob };
+  });
+}
+
+function viewMenu(){
+  const asisAll = calcAsisAll();
+  const tarde = asisAll.filter(r=>r.retraso>0);
+  const pendientes = state.quejas.filter(q=>!q.resuelta);
+  const urgentes = pendientes.filter(q=>q.severidad>=UMBRAL_URGENCIA);
   const prom = state.opiniones.length ? (state.opiniones.reduce((a,o)=>a+o.puntaje,0)/state.opiniones.length).toFixed(1) : '—';
   const kpis = [
-    {label:'Marcaciones', value:String(asisAll.length), hint:tarde.length+' con retraso', color:'#10314F'},
-    {label:'Quejas pendientes', value:String(pendientes.length), hint:urgentes.length+' urgentes', color:'#8A5A20'},
-    {label:'Opiniones', value:String(state.opiniones.length), hint:'registradas', color:'#1F6F5C'},
-    {label:'Satisfacción', value:String(prom), hint:'promedio sobre 5', color:'#1F6F5C'}
+    {label:'Marcaciones', value:String(asisAll.length), hint:tarde.length+' con retraso', color:'#8FC4FF'},
+    {label:'Quejas pendientes', value:String(pendientes.length), hint:urgentes.length+' urgentes', color:'#F3C486'},
+    {label:'Opiniones', value:String(state.opiniones.length), hint:'registradas', color:'#7DE8CE'},
+    {label:'Satisfacción', value:String(prom), hint:'promedio sobre 5', color:'#7DE8CE'}
   ];
   const cards = [
     {title:'Asistencia (RRHH)', desc:'Entrada o salida, detección de llegada tarde y cálculo de retraso.', cta:'Registrar marcación →', view:'asistencia'},
     {title:'Quejas de clientes', desc:'Registro con severidad, ordenamiento automático y alertas urgentes.', cta:'Registrar queja →', view:'quejas'},
     {title:'Opiniones de clientes', desc:'Puntaje 1-5 y actualización del promedio de satisfacción.', cta:'Registrar opinión →', view:'opiniones'},
+    {title:'Recompensas por puntualidad', desc:'Puntos, medallas por racha y canje de beneficios.', cta:'Ver saldos →', view:'recompensas'},
+    {title:'Predicción de impuntualidad', desc:'Probabilidad diaria según historial, lluvia y tráfico.', cta:'Ver pronóstico →', view:'prediccion'},
+    {title:'Clima emocional', desc:'Check-in anónimo agregado por día y por área.', cta:'Ver tendencias →', view:'clima'},
     {title:'Reportes', desc:'Informe consolidado con los indicadores de toda la operación.', cta:'Generar informe →', view:'reportes'}
   ];
   return `
     <div style="display:flex;flex-direction:column;gap:26px">
-      <div class="kpi">${kpis.map(k=>`<div class="card"><div style="font-size:13px;color:#6E7883;font-weight:600">${k.label}</div><div class="val" style="color:${k.color}">${k.value}</div><div class="muted">${k.hint}</div></div>`).join('')}</div>
-      <div class="menuCards">${cards.map(c=>`<button onclick="setView('${c.view}')"><div style="width:26px;height:3px;background:#1F6F5C"></div><div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700">${c.title}</div><div class="muted" style="line-height:1.5">${c.desc}</div><div style="font-size:13.5px;font-weight:600;color:#10314F">${c.cta}</div></button>`).join('')}</div>
+      <div class="kpi">${kpis.map(k=>`<div class="card glass"><div style="font-size:13px;color:#AEBCC6;font-weight:600">${k.label}</div><div class="val" style="color:${k.color}">${k.value}</div><div class="muted">${k.hint}</div></div>`).join('')}</div>
+      <div class="menuCards">${cards.map(c=>`<button class="glass" onclick="setView('${c.view}')"><div style="width:26px;height:3px;background:#7DE8CE"></div><div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700">${c.title}</div><div class="muted" style="line-height:1.5">${c.desc}</div><div style="font-size:13.5px;font-weight:600;color:#7DE8CE">${c.cta}</div></button>`).join('')}</div>
     </div>`;
 }
 
-function viewAsistencia() {
+function viewAsistencia(){
   const asisAll = calcAsisAll();
+  const moods = ['Motivado','Neutro','Agotado'];
   return `
     <div class="flexcols">
-      <section class="card col1">
-        <h2 style="font-size:17px">Registrar marcación</h2>
+      <section class="card glass col1">
+        <h2>Registrar marcación</h2>
         <label>Colaborador
           <input type="text" value="${state.fAsisNombre}" oninput="state.fAsisNombre=this.value" placeholder="Nombre y apellido">
+        </label>
+        <label>Área / cargo
+          <input type="text" value="${state.fAsisCargo}" oninput="state.fAsisCargo=this.value" placeholder="Ej: Atención al cliente">
         </label>
         <label>Hora de marcación
           <input type="time" value="${state.fAsisHora}" oninput="state.fAsisHora=this.value">
         </label>
         <div style="display:flex;gap:10px">
           <button class="btn-primary" style="flex:1" onclick="marcar('ENTRADA')">Entrada</button>
-          <button class="btn-outline" style="flex:1;color:#10314F;border-color:#10314F" onclick="marcar('SALIDA')">Salida</button>
+          <button class="btn-outline" style="flex:1" onclick="marcar('SALIDA')">Salida</button>
         </div>
-        <div class="muted" style="border-top:1px solid #E7EAEE;padding-top:14px">Tolerancia de entrada: <strong style="color:#14181C">${HORA_LIMITE}</strong>. Después de esa hora el sistema calcula el retraso automáticamente.</div>
-        ${state.asisMsg ? `<div style="font-size:13.5px;font-weight:600;color:#1F6F5C;background:#EEF4F1;border-radius:2px;padding:10px 12px">${state.asisMsg}</div>` : ''}
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(255,255,255,0.12);padding-top:14px">
+          <span style="font-size:13px;font-weight:600;color:#D6DFE6">Check-in emocional <span style="font-weight:400;color:#9AA9B4">· anónimo</span></span>
+          <div style="display:flex;gap:8px">
+            ${moods.map(m=>`<button class="moodbtn" style="${state.fMood===m?`background:${moodColor(m)};color:#06222B;border-color:${moodColor(m)}`:''}" onclick="state.fMood='${m}';render()">${m}</button>`).join('')}
+          </div>
+          <span style="font-size:12.5px;color:#9AA9B4;line-height:1.5">Se guarda sin tu nombre: RR.HH. solo ve totales por día y por área.</span>
+        </div>
+        <div class="muted" style="border-top:1px solid rgba(255,255,255,0.12);padding-top:14px">Tolerancia de entrada: <strong style="color:#F2F6F8">${HORA_LIMITE}</strong>. Después de esa hora el sistema calcula el retraso automáticamente.</div>
+        ${state.asisMsg ? `<div style="font-size:13.5px;font-weight:600;color:#7DE8CE;background:rgba(51,196,166,0.16);border:1px solid rgba(125,232,206,0.3);border-radius:12px;padding:10px 12px">${state.asisMsg}</div>` : ''}
       </section>
-      <section class="card col2">
+      <section class="card glass col2">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
-          <h2 style="font-size:17px">Registros guardados</h2>
+          <h2>Registros guardados</h2>
           <span class="muted">${asisAll.length} marcaciones · ${asisAll.filter(r=>r.retraso>0).length} con retraso</span>
         </div>
         ${asisAll.length===0 ? '<div class="muted" style="padding:22px 0">Aún no hay marcaciones registradas.</div>' : ''}
         <div style="display:flex;flex-direction:column;gap:8px">
-          ${asisAll.map(r=>`<div class="row">
-            <span style="flex:1 1 150px;min-width:0;font-size:14.5px;font-weight:600">${r.nombre}</span>
-            <span style="font-size:13.5px;color:#5A6672;font-weight:600">${r.tipo}</span>
-            <span style="font-size:13.5px;color:#5A6672">${r.hora}</span>
-            <span class="pill" style="background:${r.retraso>0?'#F6F0E6':'#EEF4F1'};color:${r.retraso>0?'#8A5A20':'#1F6F5C'}">${r.estado}</span>
+          ${asisAll.slice(0,60).map(r=>`<div class="row">
+            <span style="flex:1 1 150px;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:600">${r.nombre}</span><span style="font-size:12.5px;color:#9AA9B4">${r.cargo||''}</span></span>
+            <span style="font-size:13.5px;color:#C2CED7;font-weight:600">${r.tipo}</span>
+            <span style="font-size:13.5px;color:#C2CED7">${r.hora}</span>
+            <span class="pill" style="background:${r.retraso>0?'rgba(240,176,92,0.2)':'rgba(51,196,166,0.2)'};color:${r.retraso>0?'#F3C486':'#7DE8CE'}">${r.estado}</span>
           </div>`).join('')}
         </div>
       </section>
     </div>`;
 }
 
-function viewQuejas() {
+function viewQuejas(escaladas){
   const pendientes = state.quejas.filter(q=>!q.resuelta);
   const urgentes = pendientes.filter(q=>q.severidad>=UMBRAL_URGENCIA);
   return `
     <div class="flexcols">
-      <section class="card col1">
-        <h2 style="font-size:17px">Registrar queja</h2>
-        <label>Cliente
-          <input type="text" value="${state.fQuejaCliente}" oninput="state.fQuejaCliente=this.value" placeholder="Nombre del cliente">
-        </label>
-        <label>Descripción
-          <textarea rows="3" oninput="state.fQuejaTexto=this.value" placeholder="¿Qué ocurrió?">${state.fQuejaTexto}</textarea>
-        </label>
+      <section class="card glass col1">
+        <h2>Registrar queja</h2>
+        <label>Cliente<input type="text" value="${state.fQuejaCliente}" oninput="state.fQuejaCliente=this.value" placeholder="Nombre del cliente"></label>
+        <label>Descripción<textarea rows="3" oninput="state.fQuejaTexto=this.value" placeholder="¿Qué ocurrió?">${state.fQuejaTexto}</textarea></label>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:13px;font-weight:600;color:#414A54">Severidad</span>
-          <div style="display:flex;gap:8px">
-            ${[1,2,3,4,5].map(n=>`<button class="sevbtn ${state.fQuejaSev===n?'active':''}" onclick="state.fQuejaSev=${n};render()">${n}</button>`).join('')}
-          </div>
+          <span style="font-size:13px;font-weight:600;color:#D6DFE6">Severidad</span>
+          <div style="display:flex;gap:8px">${[1,2,3,4,5].map(n=>`<button class="sevbtn" style="${state.fQuejaSev===n?'background:#33C4A6;color:#06222B;border-color:#33C4A6':''}" onclick="state.fQuejaSev=${n};render()">${n}</button>`).join('')}</div>
           <span class="muted">${state.fQuejaSev} · ${sevLabels[state.fQuejaSev]}</span>
         </div>
         <button class="btn-primary" onclick="registrarQueja()">Insertar y ordenar</button>
       </section>
       <section class="col2">
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
-            <h2 style="font-size:17px">Quejas urgentes</h2>
-            <span class="muted">Severidad ${UMBRAL_URGENCIA} o superior</span>
-          </div>
+        <div class="card glass">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><h2>Quejas urgentes</h2><span class="muted">Severidad ${UMBRAL_URGENCIA} o superior</span></div>
           ${urgentes.length===0?'<div class="muted">No hay quejas urgentes pendientes.</div>':''}
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
-            ${urgentes.map(q=>`<div class="row" style="background:#FAF4F1;border-color:#E8D9D2;align-items:flex-start">
-              <span class="pill" style="background:#F5EBE8;color:#8C2F2A">S${q.severidad}</span>
-              <div><div style="font-weight:600">${q.cliente}</div><div class="muted" style="color:#5A6672">${q.descripcion}</div></div>
+            ${urgentes.map(q=>`<div class="row" style="background:rgba(232,110,98,0.14);border-color:rgba(245,167,159,0.32)">
+              <span class="pill" style="background:rgba(232,110,98,0.22);color:#F5A79F">S${q.severidad}</span>
+              <div><div style="font-weight:600">${q.cliente}</div><div class="muted">${q.descripcion}</div></div>
             </div>`).join('')}
           </div>
         </div>
-        <div class="card" style="margin-top:18px">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
-            <h2 style="font-size:17px">Lista ordenada por severidad</h2>
-            <span class="muted">${state.quejas.length} registradas · ${pendientes.length} pendientes</span>
-          </div>
+        <div class="card glass" style="margin-top:18px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px"><h2>Lista ordenada por severidad</h2><span class="muted">${state.quejas.length} registradas · ${pendientes.length} pendientes</span></div>
           ${state.quejas.length===0?'<div class="muted">Sin quejas registradas todavía.</div>':''}
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
             ${state.quejas.map(q=>{const c=sevColor(q.severidad);return `<div class="row">
               <span class="pill" style="background:${c[0]};color:${c[1]};flex:0 0 40px;text-align:center">${q.severidad}</span>
               <div style="flex:1 1 180px;min-width:0"><div style="font-weight:600">${q.cliente}</div><div class="muted">${q.descripcion}</div></div>
-              <span style="font-size:13px;font-weight:600;color:${q.resuelta?'#1F6F5C':'#8A5A20'}">${q.resuelta?'Resuelta':'Pendiente'}</span>
+              <span style="font-size:13px;font-weight:600;color:${q.resuelta?'#7DE8CE':'#F3C486'}">${q.resuelta?'Resuelta':'Pendiente'}</span>
               <button class="btn-outline" style="padding:7px 12px;font-size:13px" onclick="toggleQueja(${q.id}, ${q.resuelta})">${q.resuelta?'Reabrir':'Resolver'}</button>
             </div>`}).join('')}
           </div>
         </div>
+        ${escaladas.length ? `<div class="card glass" style="margin-top:18px;display:flex;flex-direction:column;gap:12px">
+          <h2>Avisos de escalamiento listos para reenviar</h2>
+          ${escaladas.map(e=>`<div style="display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid rgba(245,167,159,0.3);border-radius:12px;background:rgba(255,255,255,0.06)">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+              <span style="font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#06222B;background:#F5A79F;padding:5px 10px;border-radius:8px">${e.nivel}</span>
+              <span style="flex:1 1 200px;min-width:0;font-size:14.5px;font-weight:600">${e.cliente}</span>
+              <span style="font-size:13px;color:#F5C9C4;font-weight:600">${e.mins} min sin resolver</span>
+            </div>
+            <textarea id="msg-${e.id}" readonly rows="5" style="width:100%;padding:11px 12px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.22);color:#F2F6F8;border-radius:12px;font-size:13px;line-height:1.5">${e.mensaje}</textarea>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+              <button class="btn-primary" onclick="copiarAviso(${JSON.stringify(e).replace(/"/g,'&quot;')}, ${e.mins}, '${e.nivel}')">Copiar aviso para WhatsApp</button>
+              <button class="btn-outline" onclick="toggleQueja(${e.id}, false)">Marcar como resuelta</button>
+              ${state.copiado===e.id?'<span style="font-size:13px;font-weight:600;color:#7DE8CE">Mensaje copiado al portapapeles</span>':''}
+            </div>
+          </div>`).join('')}
+          <span style="font-size:12.5px;color:#E6D5D2;line-height:1.5">El envío por WhatsApp o llamada no está integrado: el sistema deja el aviso listo para reenviarlo manualmente.</span>
+        </div>` : ''}
       </section>
     </div>`;
 }
 
-function viewOpiniones() {
+function viewOpiniones(){
   const prom = state.opiniones.length ? (state.opiniones.reduce((a,o)=>a+o.puntaje,0)/state.opiniones.length).toFixed(1) : '—';
   const dist = [5,4,3,2,1].map(n=>{const c=state.opiniones.filter(o=>o.puntaje===n).length; return {n,count:c,pct:(state.opiniones.length?Math.round(c/state.opiniones.length*100):0)}});
   return `
     <div class="flexcols">
-      <section class="card col1">
-        <h2 style="font-size:17px">Registrar opinión</h2>
-        <label>Cliente
-          <input type="text" value="${state.fOpiCliente}" oninput="state.fOpiCliente=this.value" placeholder="Nombre del cliente">
-        </label>
+      <section class="card glass col1">
+        <h2>Registrar opinión</h2>
+        <label>Cliente<input type="text" value="${state.fOpiCliente}" oninput="state.fOpiCliente=this.value" placeholder="Nombre del cliente"></label>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:13px;font-weight:600;color:#414A54">Puntaje de satisfacción (1-5)</span>
-          <div style="display:flex;gap:8px">
-            ${[1,2,3,4,5].map(n=>`<button class="ptbtn ${state.fOpiPuntaje===n?'active':''}" onclick="state.fOpiPuntaje=${n};render()">${n}</button>`).join('')}
-          </div>
+          <span style="font-size:13px;font-weight:600;color:#D6DFE6">Puntaje de satisfacción (1-5)</span>
+          <div style="display:flex;gap:8px">${[1,2,3,4,5].map(n=>`<button class="ptbtn" style="${state.fOpiPuntaje===n?'background:#33C4A6;color:#06222B;border-color:#33C4A6':''}" onclick="state.fOpiPuntaje=${n};render()">${n}</button>`).join('')}</div>
           <span class="muted">${state.fOpiPuntaje} · ${puntLabels[state.fOpiPuntaje]}</span>
         </div>
-        <label>Comentario
-          <textarea rows="3" oninput="state.fOpiTexto=this.value" placeholder="Opcional">${state.fOpiTexto}</textarea>
-        </label>
-        <button class="btn-primary" style="background:#1F6F5C" onclick="guardarOpinion()">Guardar opinión</button>
+        <label>Comentario<textarea rows="3" oninput="state.fOpiTexto=this.value" placeholder="Opcional">${state.fOpiTexto}</textarea></label>
+        <button class="btn-primary" onclick="guardarOpinion()">Guardar opinión</button>
       </section>
       <section class="col2">
-        <div class="card" style="flex-direction:row;align-items:center;gap:26px;flex-wrap:wrap;display:flex">
-          <div><div style="font-size:13px;font-weight:600;color:#6E7883">Promedio de satisfacción</div><div style="font-family:'IBM Plex Serif',serif;font-size:44px;font-weight:700;color:#1F6F5C">${prom}</div><div class="muted">sobre 5 · ${state.opiniones.length} opiniones</div></div>
+        <div class="card glass" style="flex-direction:row;align-items:center;gap:26px;flex-wrap:wrap;display:flex">
+          <div><div style="font-size:13px;font-weight:600;color:#AEBCC6">Promedio de satisfacción</div><div style="font-family:'IBM Plex Serif',serif;font-size:44px;font-weight:700;color:#7DE8CE">${prom}</div><div class="muted">sobre 5 · ${state.opiniones.length} opiniones</div></div>
           <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:7px">
-            ${dist.map(d=>`<div style="display:flex;align-items:center;gap:10px"><span style="width:14px;font-size:13px;font-weight:600">${d.n}</span><div style="flex:1;height:9px;border-radius:2px;background:#E7EAEE;overflow:hidden"><div style="height:100%;background:#1F6F5C;width:${d.pct}%"></div></div><span style="width:26px;text-align:right;font-size:13px;color:#8A939C">${d.count}</span></div>`).join('')}
+            ${dist.map(d=>`<div style="display:flex;align-items:center;gap:10px"><span style="width:14px;font-size:13px;font-weight:600">${d.n}</span><div style="flex:1;height:9px;border-radius:12px;background:rgba(255,255,255,0.14);overflow:hidden"><div style="height:100%;background:#1F6F5C;width:${d.pct}%"></div></div><span style="width:26px;text-align:right;font-size:13px;color:#9AA9B4">${d.count}</span></div>`).join('')}
           </div>
         </div>
-        <div class="card" style="margin-top:18px">
-          <h2 style="font-size:17px">Opiniones guardadas</h2>
+        <div class="card glass" style="margin-top:18px">
+          <h2>Opiniones guardadas</h2>
           ${state.opiniones.length===0?'<div class="muted">Todavía no hay opiniones.</div>':''}
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
             ${state.opiniones.map(o=>`<div class="row" style="align-items:flex-start">
-              <span class="pill" style="background:#EEF4F1;color:#1F6F5C;flex:0 0 40px;text-align:center">${o.puntaje}</span>
+              <span class="pill" style="background:rgba(255,255,255,0.12);color:#7DE8CE;flex:0 0 40px;text-align:center">${o.puntaje}</span>
               <div><div style="font-weight:600">${o.cliente}</div><div class="muted">${o.comentario}</div></div>
             </div>`).join('')}
           </div>
@@ -311,40 +393,227 @@ function viewOpiniones() {
     </div>`;
 }
 
-function viewReportes() {
+function viewRecompensas(empleados){
+  const rankingPuntos = [...empleados].sort((a,b)=>b.saldo-a.saldo);
+  const totalPuntos = empleados.reduce((a,e)=>a+e.saldo,0);
+  const conMedalla = empleados.filter(e=>e.medalla!=='Sin medalla').length;
+  const mejorRacha = empleados.reduce((a,e)=>Math.max(a,e.racha),0);
+  const empSel = empleados.find(e=>e.nombre===state.empSel);
+  return `
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div class="kpi">
+        <div class="card glass"><div style="font-size:13px;color:#AEBCC6;font-weight:600">Puntos vigentes</div><div class="val" style="color:#7DE8CE">${totalPuntos}</div><div class="muted">suma de saldos del equipo</div></div>
+        <div class="card glass"><div style="font-size:13px;color:#AEBCC6;font-weight:600">Con medalla</div><div class="val" style="color:#F7DA9A">${conMedalla}</div><div class="muted">bronce 3 · plata 5 · oro 8 días</div></div>
+        <div class="card glass"><div style="font-size:13px;color:#AEBCC6;font-weight:600">Mejor racha</div><div class="val" style="color:#8FC4FF">${mejorRacha}</div><div class="muted">días consecutivos sin retraso</div></div>
+      </div>
+      <div class="flexcols">
+        <section class="card glass col2">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h2>Saldo por colaborador</h2><span class="muted">Toca una fila para canjear</span></div>
+          ${rankingPuntos.length===0?'<div class="muted">Todavía no hay marcaciones para calcular puntos.</div>':''}
+          <div style="display:flex;flex-direction:column;gap:8px">
+            ${rankingPuntos.map(e=>{const c=medallaColor(e.medalla); const sel=state.empSel===e.nombre;
+              return `<button onclick="state.empSel='${e.nombre.replace(/'/g,"\\'")}';state.canjeMsg='';render()" style="text-align:left;cursor:pointer;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 14px;border:1px solid ${sel?'rgba(125,232,206,0.4)':'rgba(255,255,255,0.12)'};border-radius:12px;background:${sel?'rgba(51,196,166,0.16)':'rgba(255,255,255,0.05)'};font-family:inherit;color:#F2F6F8">
+                <span style="flex:1 1 150px;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:600">${e.nombre}</span><span style="font-size:12.5px;color:#9AA9B4">${e.cargo}</span></span>
+                <span style="font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px;background:${c[0]};color:${c[1]}">${e.medalla}</span>
+                <span style="font-size:13px;color:#C2CED7">racha ${e.racha} d</span>
+                <span style="font-family:'IBM Plex Serif',serif;font-size:18px;font-weight:700;color:#7DE8CE">${e.saldo}</span>
+              </button>`}).join('')}
+          </div>
+        </section>
+        <section class="card glass col1">
+          <h2>Canjear beneficio</h2>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12)">
+            <span style="font-size:14.5px;font-weight:600">${empSel?empSel.nombre:'—'}</span>
+            <span class="muted">${empSel?`Saldo ${empSel.saldo} pts · ${empSel.medalla} · racha ${empSel.racha} d`:'Elegí un colaborador de la lista'}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            ${BENEFICIOS.map(b=>{const alcanza = !!empSel && empSel.saldo>=b.costo; return `<div style="display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid rgba(255,255,255,0.12);border-radius:12px;background:rgba(255,255,255,0.05)">
+              <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-size:14.5px;font-weight:600">${b.nombre}</span><span style="font-size:14px;font-weight:700;color:#7DE8CE">${b.costo} pts</span></div>
+              <span style="font-size:13px;font-weight:600;color:${alcanza?'#7DE8CE':'#F3C486'}">${empSel ? (alcanza?'Disponible':'Puntos insuficientes') : 'Seleccioná un colaborador'}</span>
+              <button class="btn-primary" onclick='canjear(${JSON.stringify(b)}, ${JSON.stringify(empleados)})'>Registrar canje</button>
+            </div>`}).join('')}
+          </div>
+          ${state.canjeMsg?`<div style="font-size:13.5px;font-weight:600;color:#7DE8CE;background:rgba(51,196,166,0.16);border:1px solid rgba(125,232,206,0.3);border-radius:12px;padding:10px 12px">${state.canjeMsg}</div>`:''}
+        </section>
+      </div>
+      <section class="card glass">
+        <h2>Canjes registrados</h2>
+        ${state.canjes.length===0?'<div class="muted">Todavía no se registraron canjes.</div>':''}
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+          ${state.canjes.map(c=>`<div class="row">
+            <span style="flex:1 1 150px;min-width:0;font-weight:600">${c.nombre}</span>
+            <span style="flex:1 1 160px;min-width:0;color:#C2CED7;font-size:13.5px">${c.beneficio}</span>
+            <span class="muted">${fechaFmt(c.creado)}</span>
+            <span style="font-size:13.5px;font-weight:700;color:#F3C486">-${c.costo} pts</span>
+          </div>`).join('')}
+        </div>
+      </section>
+    </div>`;
+}
+
+function viewPrediccion(empleados){
+  const enRiesgo = [...empleados].filter(e=>e.prob>=UMBRAL_RETRASO).sort((a,b)=>b.prob-a.prob);
+  const todosPronostico = [...empleados].sort((a,b)=>b.prob-a.prob);
+  return `
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <section class="card glass" style="display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:600;color:#D6DFE6">Condiciones del día (simuladas, editables)</span>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-outline" style="${state.lluvia?'background:#8FC4FF;color:#06222B':''}" onclick="state.lluvia=!state.lluvia;render()">Día lluvioso: ${state.lluvia?'sí':'no'}</button>
+            <button class="btn-outline" style="${state.trafico?'background:#F3C486;color:#06222B':''}" onclick="state.trafico=!state.trafico;render()">Tráfico intenso: ${state.trafico?'sí':'no'}</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;max-width:46ch">
+          <span style="font-size:13px;color:#AEBCC6;font-weight:600">Umbral de alerta: ${UMBRAL_RETRASO}%</span>
+          <span style="font-size:13.5px;color:#C2CED7;line-height:1.5">${(state.lluvia||state.trafico)?'Condiciones adversas activas: el modelo sube la probabilidad base de todo el personal.':'Condiciones normales: la probabilidad depende solo del historial de cada colaborador.'}</span>
+        </div>
+      </section>
+      <section class="card glass">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h2>Notificación al supervisor</h2><span class="muted">${enRiesgo.length} colaborador(es) sobre el umbral</span></div>
+        ${enRiesgo.length===0?'<div class="muted">Ningún colaborador supera el umbral con las condiciones actuales.</div>':''}
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+          ${enRiesgo.map(e=>`<div style="display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid rgba(243,196,134,0.32);border-radius:12px;background:rgba(240,176,92,0.12)">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center">
+              <span style="flex:1 1 160px;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:600">${e.nombre}</span><span style="font-size:12.5px;color:#9AA9B4">${e.cargo} · ${e.tardes} retrasos de ${e.marcaciones} entradas</span></span>
+              <span style="font-family:'IBM Plex Serif',serif;font-size:22px;font-weight:700;color:${e.prob>=75?'#F5A79F':'#F3C486'}">${e.prob}%</span>
+            </div>
+            <div style="height:8px;border-radius:12px;background:rgba(255,255,255,0.14);overflow:hidden"><div style="height:100%;background:${e.prob>=75?'#F5A79F':'#F3C486'};width:${e.prob}%"></div></div>
+            <span style="font-size:13px;color:#E9DCC9;line-height:1.55">Recordatorio preventivo: Hola ${e.nombre.split(' ')[0]}, hoy hay ${state.lluvia?'lluvia':'condiciones normales'}${state.trafico?' y tráfico intenso':''}. Tu probabilidad estimada de llegar tarde es ${e.prob}%. Te sugerimos salir 20 minutos antes; tu racha actual es de ${e.racha} día(s) sin retraso.</span>
+          </div>`).join('')}
+        </div>
+      </section>
+      <section class="card glass">
+        <h2>Probabilidad estimada por colaborador</h2>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+          ${todosPronostico.map(e=>`<div class="row">
+            <span style="flex:1 1 150px;min-width:0;display:flex;flex-direction:column;gap:1px"><span style="font-size:14.5px;font-weight:600">${e.nombre}</span><span style="font-size:12.5px;color:#9AA9B4">historial tarde ${e.tasaTardeTexto} · racha ${e.racha} d</span></span>
+            <span style="flex:2 1 160px;min-width:120px;height:8px;border-radius:12px;background:rgba(255,255,255,0.14);overflow:hidden"><span style="display:block;height:100%;background:${e.prob>=UMBRAL_RETRASO?'#F5A79F':e.prob>=UMBRAL_RETRASO*0.7?'#F3C486':'#7DE8CE'};width:${e.prob}%"></span></span>
+            <span style="flex:0 0 52px;text-align:right;font-size:14px;font-weight:700;color:${e.prob>=UMBRAL_RETRASO?'#F5A79F':e.prob>=UMBRAL_RETRASO*0.7?'#F3C486':'#7DE8CE'}">${e.prob}%</span>
+          </div>`).join('')}
+          ${todosPronostico.length===0?'<div class="muted">Sin datos de asistencia todavía.</div>':''}
+        </div>
+      </section>
+    </div>`;
+}
+
+function viewClima(){
+  const animos = state.animos;
+  const totalAnimos = animos.length;
+  const moodResumen = ['Motivado','Neutro','Agotado'].map(m=>{const c=animos.filter(a=>a.mood===m).length; return {mood:m,count:c,pct:(totalAnimos?Math.round(c/totalAnimos*100):0),color:moodColor(m)};});
+  const climaDias = [...new Set(animos.map(a=>dayKey(a.creado)))].sort().reverse().slice(0,7).map(k=>{
+    const dd = animos.filter(a=>dayKey(a.creado)===k);
+    const c = m => dd.filter(a=>a.mood===m).length;
+    const total = dd.length||1;
+    return { dia: new Date(k+'T12:00:00Z').toLocaleDateString('es-ES',{weekday:'short',day:'2-digit',month:'2-digit'}),
+      total: dd.length, motivado:c('Motivado'), neutro:c('Neutro'), agotado:c('Agotado'),
+      pctMot: Math.round(c('Motivado')/total*100), pctNeu: Math.round(c('Neutro')/total*100), pctAgo: Math.round(c('Agotado')/total*100) };
+  });
+  const climaDeptos = [...new Set(animos.map(a=>a.cargo))].map(cargo=>{
+    const dd = animos.filter(a=>a.cargo===cargo);
+    const ago = dd.filter(a=>a.mood==='Agotado').length;
+    const idx = dd.length ? Math.round(ago/dd.length*100) : 0;
+    return { cargo, idx, color: idx>=50?'#F5A79F':idx>=30?'#F3C486':'#7DE8CE' };
+  }).sort((a,b)=>b.idx-a.idx);
+  return `
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <section class="card glass" style="display:flex;flex-wrap:wrap;gap:26px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:13px;font-weight:600;color:#AEBCC6">Check-ins anónimos</span>
+          <span style="font-family:'IBM Plex Serif',serif;font-size:44px;font-weight:700;color:#7DE8CE;line-height:1">${totalAnimos}</span>
+          <span class="muted">sin vínculo con el nombre</span>
+        </div>
+        <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:8px">
+          ${moodResumen.map(m=>`<div style="display:flex;align-items:center;gap:12px">
+            <span style="flex:0 0 84px;font-size:13.5px;color:#C2CED7;font-weight:600">${m.mood}</span>
+            <span style="flex:1;height:9px;border-radius:12px;background:rgba(255,255,255,0.14);overflow:hidden"><span style="display:block;height:100%;background:${m.color};width:${m.pct}%"></span></span>
+            <span style="flex:0 0 52px;text-align:right;font-size:13px;color:#9AA9B4">${m.count}</span>
+          </div>`).join('')}
+        </div>
+      </section>
+      <div class="flexcols">
+        <section class="card glass col1">
+          <h2>Tendencia por día</h2>
+          ${climaDias.length===0?'<div class="muted">Sin check-ins registrados.</div>':''}
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+            ${climaDias.map(d=>`<div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:13.5px;color:#C2CED7;font-weight:600">${d.dia}</span><span class="muted">${d.total} check-ins</span></div>
+              <div style="display:flex;height:10px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.12)">
+                <span style="background:#7DE8CE;width:${d.pctMot}%"></span><span style="background:#8FC4FF;width:${d.pctNeu}%"></span><span style="background:#F3C486;width:${d.pctAgo}%"></span>
+              </div>
+              <span style="font-size:12.5px;color:#9AA9B4">${d.motivado} motivado · ${d.neutro} neutro · ${d.agotado} agotado</span>
+            </div>`).join('')}
+          </div>
+        </section>
+        <section class="card glass col1">
+          <h2>Índice de desgaste por área</h2>
+          <span class="muted">Porcentaje de check-ins "Agotado" del área</span>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+            ${climaDeptos.map(d=>`<div style="display:flex;align-items:center;gap:12px">
+              <span style="flex:1 1 130px;min-width:0;font-size:13.5px;font-weight:600">${d.cargo}</span>
+              <span style="flex:2 1 120px;min-width:100px;height:9px;border-radius:12px;background:rgba(255,255,255,0.14);overflow:hidden"><span style="display:block;height:100%;background:${d.color};width:${d.idx}%"></span></span>
+              <span style="flex:0 0 46px;text-align:right;font-size:13.5px;font-weight:700;color:${d.color}">${d.idx}%</span>
+            </div>`).join('')}
+            ${climaDeptos.length===0?'<div class="muted">Sin datos suficientes.</div>':''}
+          </div>
+          <span style="font-size:12.5px;color:#9AA9B4;line-height:1.5;border-top:1px solid rgba(255,255,255,0.12);padding-top:12px">El índice es el porcentaje de check-ins "Agotado" del área. No se almacena qué persona eligió cada estado.</span>
+        </section>
+      </div>
+    </div>`;
+}
+
+function viewReportes(empleados, enRiesgo, escaladas){
   const asisAll = calcAsisAll();
-  const dias = state.periodo === 'dia' ? 1 : state.periodo === 'semana' ? 7 : 30;
-  const corte = Date.now() - dias*86400000;
-  const idTime = r => r.creado ? new Date(r.creado).getTime() : Date.now();
-  const pAsis = asisAll.filter(r=>idTime(r)>=corte);
-  const pQuejas = state.quejas.filter(q=>idTime(q)>=corte);
-  const pOpi = state.opiniones.filter(o=>idTime(o)>=corte);
+  const dias = state.periodo==='dia'?1:state.periodo==='semana'?7:30;
+  const corte = Date.now()-dias*86400000;
+  const t = r => new Date(r.creado).getTime();
+  const pAsis = asisAll.filter(r=>t(r)>=corte);
+  const pQuejas = state.quejas.filter(q=>t(q)>=corte);
+  const pOpi = state.opiniones.filter(o=>t(o)>=corte);
   const pTarde = pAsis.filter(r=>r.retraso>0);
   const pPend = pQuejas.filter(q=>!q.resuelta);
   const pUrg = pPend.filter(q=>q.severidad>=UMBRAL_URGENCIA);
-  const pProm = pOpi.length ? (pOpi.reduce((a,o)=>a+o.puntaje,0)/pOpi.length).toFixed(1) : '—';
+  const pProm = pOpi.length?(pOpi.reduce((a,o)=>a+o.puntaje,0)/pOpi.length).toFixed(1):'—';
   const pLabel = {dia:'diario',semana:'semanal',mes:'mensual'}[state.periodo];
   const minTarde = pTarde.reduce((a,r)=>a+r.retraso,0);
   const opts = [['dia','Diario'],['semana','Semanal'],['mes','Mensual']];
+  const totalAnimos = state.animos.length;
+  const climaDeptos = [...new Set(state.animos.map(a=>a.cargo))].map(cargo=>{const dd=state.animos.filter(a=>a.cargo===cargo);const ago=dd.filter(a=>a.mood==='Agotado').length;return {cargo, idx: dd.length?Math.round(ago/dd.length*100):0};}).sort((a,b)=>b.idx-a.idx);
+  const informe = [
+    ['Periodo del informe', pLabel.charAt(0).toUpperCase()+pLabel.slice(1)],
+    ['Marcaciones registradas', pAsis.length],
+    ['Llegadas tarde detectadas', pTarde.length+' ('+minTarde+' min)'],
+    ['Quejas totales / pendientes', pQuejas.length+' / '+pPend.length],
+    ['Quejas urgentes (severidad '+UMBRAL_URGENCIA+'+)', pUrg.length],
+    ['Opiniones registradas', pOpi.length],
+    ['Promedio de satisfacción', pProm+' / 5'],
+    ['Puntos de puntualidad vigentes', empleados.reduce((a,e)=>a+e.saldo,0)],
+    ['Colaboradores con medalla', empleados.filter(e=>e.medalla!=='Sin medalla').length],
+    ['Canjes de beneficios registrados', state.canjes.length],
+    ['Riesgo de impuntualidad sobre umbral', enRiesgo.length+' de '+empleados.length],
+    ['Quejas críticas escaladas', escaladas.length],
+    ['Check-ins emocionales (anónimos)', totalAnimos],
+    ['Área con mayor desgaste', climaDeptos.length? climaDeptos[0].cargo+' ('+climaDeptos[0].idx+'%)' : '—']
+  ];
   return `
     <div style="display:flex;flex-direction:column;gap:20px">
-      <div class="card no-print" style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+      <div class="card glass no-print" style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
         <div style="display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:13px;font-weight:600">Periodo del reporte</span>
-          <div style="display:flex;gap:8px">${opts.map(([k,l])=>`<button class="btn-outline" style="${state.periodo===k?'background:#10314F;color:#fff;border-color:#10314F':''}" onclick="state.periodo='${k}';render()">${l}</button>`).join('')}</div>
+          <span style="font-size:13px;font-weight:600;color:#D6DFE6">Periodo del reporte</span>
+          <div style="display:flex;gap:8px">${opts.map(([k,l])=>`<button class="btn-outline" style="${state.periodo===k?'background:#33C4A6;color:#06222B;border-color:#33C4A6':''}" onclick="state.periodo='${k}';render()">${l}</button>`).join('')}</div>
         </div>
         <button class="btn-primary" onclick="window.print()">Exportar PDF</button>
       </div>
       <div class="kpi">
-        ${[{l:'Llegadas tarde',v:pTarde.length,h:minTarde+' min de retraso',c:'#8A5A20'},{l:'Quejas pendientes',v:pPend.length,h:pUrg.length+' urgentes',c:'#8C2F2A'},{l:'Promedio satisfacción',v:pProm,h:pOpi.length+' opiniones',c:'#1F6F5C'},{l:'Marcaciones',v:pAsis.length,h:'entradas y salidas',c:'#10314F'}].map(k=>`<div class="card"><div style="font-size:13px;color:#6E7883;font-weight:600">${k.l}</div><div class="val" style="color:${k.c}">${k.v}</div><div class="muted">${k.h}</div></div>`).join('')}
+        ${[{l:'Llegadas tarde',v:pTarde.length,h:minTarde+' min de retraso',c:'#F3C486'},{l:'Quejas pendientes',v:pPend.length,h:pUrg.length+' urgentes',c:'#F5A79F'},{l:'Promedio satisfacción',v:pProm,h:pOpi.length+' opiniones',c:'#7DE8CE'},{l:'Marcaciones',v:pAsis.length,h:'entradas y salidas',c:'#8FC4FF'}].map(k=>`<div class="card glass"><div style="font-size:13px;color:#AEBCC6;font-weight:600">${k.l}</div><div class="val" style="color:${k.c}">${k.v}</div><div class="muted">${k.h}</div></div>`).join('')}
       </div>
-      <div id="reporte-pdf" class="card" style="display:flex;flex-direction:column;gap:18px">
+      <div id="reporte-pdf" style="padding:26px;display:flex;flex-direction:column;gap:18px">
         <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:2px solid #0B2239;padding-bottom:14px">
           <div><span class="kicker">Recursos Humanos y Gestión de Clientes</span><h2 style="font-size:20px">Informe consolidado ${pLabel}</h2></div>
           <span style="font-size:13px;color:#5A6672">Generado el ${fechaFmt(Date.now())}</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
-          ${[['Periodo del informe', pLabel.charAt(0).toUpperCase()+pLabel.slice(1)],['Marcaciones registradas', pAsis.length],['Llegadas tarde detectadas', pTarde.length+' ('+minTarde+' min)'],['Quejas totales / pendientes', pQuejas.length+' / '+pPend.length],['Quejas urgentes (severidad '+UMBRAL_URGENCIA+'+)', pUrg.length],['Opiniones registradas', pOpi.length],['Promedio de satisfacción', pProm+' / 5']].map(([l,v])=>`<div style="display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid #E7EAEE"><span style="color:#414A54">${l}</span><span style="font-weight:700">${v}</span></div>`).join('')}
+          ${informe.map(([l,v])=>`<div style="display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid #E7EAEE"><span style="color:#414A54">${l}</span><span style="font-weight:700">${v}</span></div>`).join('')}
         </div>
         <div style="font-size:14px;color:#5A6672;line-height:1.6;background:#F5F6F7;border-radius:2px;padding:16px 18px">
           ${pPend.length||pTarde.length ? 'Prioriza '+pUrg.length+' queja(s) urgente(s) y revisa '+pTarde.length+' llegada(s) tarde con el equipo antes del próximo turno.' : 'Sin incidencias abiertas en el periodo: la operación se encuentra equilibrada.'}
@@ -353,54 +622,80 @@ function viewReportes() {
     </div>`;
 }
 
-function viewSalir() {
+function viewSalir(){
   return `
-    <div class="card" style="max-width:640px;display:flex;flex-direction:column;gap:16px">
+    <div class="card glass" style="max-width:640px;display:flex;flex-direction:column;gap:16px">
       <div style="width:44px;height:3px;background:#1F6F5C"></div>
       <h2 style="font-size:24px">Sesión finalizada</h2>
       <p class="muted" style="font-size:15.5px;line-height:1.6">Se registraron ${state.asistencia.length} marcaciones, ${state.quejas.length} quejas y ${state.opiniones.length} opiniones.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-primary" onclick="setView('menu')">Volver al menú principal</button>
-        <button class="btn-outline" style="border-color:#8C2F2A;color:#8C2F2A" onclick="vaciarTodo()">Vaciar todos los datos</button>
+        <button class="btn-outline" style="border-color:rgba(245,167,159,0.4);color:#F5A79F" onclick="vaciarTodo()">Vaciar todos los datos</button>
       </div>
     </div>`;
 }
 
 const navDefs = [
   ['menu','Menú principal','#94A3B1'],['asistencia','Asistencia (RRHH)','#6BA4D8'],
-  ['quejas','Quejas clientes','#A9714B'],['opiniones','Opiniones clientes','#4E9683'],
-  ['reportes','Reportes','#9A8248'],['salir','Salir','#8795A2']
+  ['recompensas','Recompensas','#F3C486'],['prediccion','Predicción','#8FC4FF'],
+  ['clima','Clima emocional','#7DE8CE'],['quejas','Quejas clientes','#A9714B'],
+  ['opiniones','Opiniones clientes','#4E9683'],['reportes','Reportes','#9A8248'],['salir','Salir','#8795A2']
 ];
 const views = {
   menu:['Menú principal','Sistema Integrado de Gestión Operativa','Selecciona un módulo para iniciar el flujo de trabajo.'],
   asistencia:['Recursos Humanos','Control de asistencia','Registra entradas y salidas. El sistema calcula el retraso automáticamente.'],
+  recompensas:['Reconocimiento','Recompensas por puntualidad','Cada entrada a tiempo suma puntos; las rachas otorgan medallas y los puntos se canjean por beneficios.'],
+  prediccion:['Analítica preventiva','Predicción de impuntualidad','Combina el historial de cada colaborador con las condiciones del día para estimar la probabilidad de llegada tarde.'],
+  clima:['Bienestar','Clima emocional','Check-in anónimo al marcar: RR.HH. solo ve conteos agregados por día y por área.'],
   quejas:['Clientes','Quejas de clientes','Registra la queja; el sistema la ordena de mayor a menor severidad.'],
   opiniones:['Clientes','Opiniones y satisfacción','Registra el puntaje de 1 a 5; el promedio se actualiza al guardar.'],
   reportes:['Consolidado','Reportes','Informe con llegadas tarde, quejas pendientes y promedio de satisfacción.'],
   salir:['Cierre','Salir del sistema','']
 };
 
-function render() {
+function render(){
+  const empleados = calcEmpleados();
+  const ahora = Date.now();
+  const escaladas = state.quejas.filter(q => q.severidad===5 && !q.resuelta && ahora-new Date(q.creado).getTime() >= MIN_ESCALADA*60000)
+    .map(q => { const mins = Math.round((ahora-new Date(q.creado).getTime())/60000);
+      return { ...q, mins, nivel: mins>=MIN_ESCALADA*3?'Dirección general':mins>=MIN_ESCALADA*2?'Director de área':'Gerente de área',
+        mensaje: '🔴 ESCALAMIENTO NIVEL '+(mins>=MIN_ESCALADA*2?'2':'1')+' · Queja crítica sin resolver\n'+'Cliente: '+q.cliente+'\nSeveridad: 5 (crítica)\nAbierta hace: '+mins+' minutos\nDetalle: '+q.descripcion+'\nAcción requerida: contactar al cliente y registrar la resolución en el sistema.' };
+    }).sort((a,b)=>b.mins-a.mins);
+  const enRiesgo = empleados.filter(e=>e.prob>=UMBRAL_RETRASO);
+
   const v = views[state.view];
   const body = state.cargando ? '<div class="muted" style="padding:40px">Cargando datos...</div>' :
     state.view==='menu' ? viewMenu() :
     state.view==='asistencia' ? viewAsistencia() :
-    state.view==='quejas' ? viewQuejas() :
+    state.view==='quejas' ? viewQuejas(escaladas) :
     state.view==='opiniones' ? viewOpiniones() :
-    state.view==='reportes' ? viewReportes() : viewSalir();
+    state.view==='recompensas' ? viewRecompensas(empleados) :
+    state.view==='prediccion' ? viewPrediccion(empleados) :
+    state.view==='clima' ? viewClima() :
+    state.view==='reportes' ? viewReportes(empleados, enRiesgo, escaladas) : viewSalir();
+
+  const alertaHtml = (!state.cargando && escaladas.length) ? `
+    <div class="no-print" style="background:rgba(232,110,98,0.16);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border:1px solid rgba(245,167,159,0.4);box-shadow:0 18px 44px rgba(4,14,26,0.34);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <span style="width:8px;height:8px;border-radius:50%;background:#F5A79F"></span>
+        <span style="font-family:'IBM Plex Serif',serif;font-size:16px;font-weight:700;color:#FFD9D4">Escalamiento automático</span>
+        <span style="font-size:13.5px;color:#F5C9C4">${escaladas.length===1?'1 queja crítica sin resolver hace '+escaladas[0].mins+' min · escalada a '+escaladas[0].nivel : escaladas.length+' quejas críticas sin resolver (la más antigua, '+escaladas[0].mins+' min) · nivel máximo '+escaladas[0].nivel}</span>
+      </div>
+      ${state.view!=='quejas' ? `<button class="btn-outline" onclick="setView('quejas')">Ver detalle en Quejas</button>` : `<span style="font-size:13px;color:#F5C9C4">Detalle y aviso listo para reenviar abajo</span>`}
+    </div>` : '';
 
   document.getElementById('app').innerHTML = `
     <aside class="sidebar">
       <div style="display:flex;flex-direction:column;gap:6px">
         <div style="width:30px;height:3px;background:#6BA4D8"></div>
         <div style="font-family:'IBM Plex Serif',serif;font-weight:700;font-size:16px;line-height:1.25">Sistema Integrado<br>de Gestión Operativa</div>
-        <div style="font-size:12.5px;color:#94A3B1;letter-spacing:0.04em;text-transform:uppercase">RR.HH. y Clientes</div>
+        <div style="font-size:12.5px;color:#AFBEC8;letter-spacing:0.04em;text-transform:uppercase">RR.HH. y Clientes</div>
       </div>
-      <div style="border-top:1px solid #1C3550"></div>
+      <div style="border-top:1px solid rgba(255,255,255,0.14)"></div>
       <nav>
-        ${navDefs.map(([k,label,dot])=>`<button onclick="setView('${k}')" style="background:${state.view===k?'#14314D':'transparent'};color:${state.view===k?'#fff':'#C3CBD3'}"><span class="dot" style="background:${dot}"></span>${label}</button>`).join('')}
+        ${navDefs.map(([k,label,dot])=>`<button onclick="setView('${k}')" style="background:${state.view===k?'rgba(255,255,255,0.16)':'transparent'};color:${state.view===k?'#fff':'#BECBD5'}"><span class="dot" style="background:${dot}"></span>${label}</button>`).join('')}
       </nav>
-      <div style="margin-top:auto;font-size:12.5px;color:#8795A2;line-height:1.5">Los datos se guardan en la base de datos del servidor.</div>
+      <div style="margin-top:auto;font-size:12.5px;color:#A3B2BD;line-height:1.5">Los datos se guardan en la base de datos del servidor.</div>
     </aside>
     <main>
       <header class="top">
@@ -409,20 +704,17 @@ function render() {
           <h1 style="font-size:29px">${v[1]}</h1>
           <p class="muted" style="max-width:62ch">${v[2]}</p>
         </div>
-        <div style="display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #DCE0E5;border-radius:2px;padding:10px 14px">
-          <span class="dot" style="background:#1F6F5C"></span>
-          <span style="font-size:14px;color:#414A54;font-weight:600">${state.reloj || '--:--'}</span>
+        <div class="glass" style="display:flex;gap:10px;align-items:center;padding:10px 14px">
+          <span class="dot" style="background:#33C4A6"></span>
+          <span style="font-size:14px;color:#D6DFE6;font-weight:600">${state.reloj || '--:--'}</span>
         </div>
       </header>
+      ${alertaHtml}
       ${body}
     </main>`;
 }
 
-function tick() {
-  const d = new Date();
-  state.reloj = d.toTimeString().slice(0,5);
-  if (!state.fAsisHora) state.fAsisHora = state.reloj;
-}
+function tick(){ const d=new Date(); state.reloj=d.toTimeString().slice(0,5); if (!state.fAsisHora) state.fAsisHora=state.reloj; }
 
 tick();
 setInterval(()=>{tick(); render();}, 20000);
