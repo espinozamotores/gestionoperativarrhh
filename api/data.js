@@ -1,7 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.POSTGRES_URL);
-const TABLAS = ['asistencia', 'quejas', 'opiniones'];
+const TABLAS = ['asistencia', 'quejas', 'opiniones', 'canjes', 'animos'];
 
 export default async function handler(req, res) {
   const { table } = req.query;
@@ -21,10 +21,10 @@ export default async function handler(req, res) {
       let rows;
 
       if (table === 'asistencia') {
-        const { nombre, tipo, hora, retraso } = body;
+        const { nombre, cargo, tipo, hora, retraso } = body;
         rows = await sql(
-          `INSERT INTO asistencia (nombre, tipo, hora, retraso) VALUES ($1, $2, $3, $4) RETURNING *`,
-          [nombre, tipo, hora, retraso || 0]
+          `INSERT INTO asistencia (nombre, cargo, tipo, hora, retraso) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+          [nombre, cargo || 'Sin área', tipo, hora, retraso || 0]
         );
       } else if (table === 'quejas') {
         const { cliente, descripcion, severidad } = body;
@@ -37,6 +37,18 @@ export default async function handler(req, res) {
         rows = await sql(
           `INSERT INTO opiniones (cliente, puntaje, comentario) VALUES ($1, $2, $3) RETURNING *`,
           [cliente, puntaje, comentario || 'Sin comentario']
+        );
+      } else if (table === 'canjes') {
+        const { nombre, beneficio, costo } = body;
+        rows = await sql(
+          `INSERT INTO canjes (nombre, beneficio, costo) VALUES ($1, $2, $3) RETURNING *`,
+          [nombre, beneficio, costo]
+        );
+      } else if (table === 'animos') {
+        const { cargo, mood } = body;
+        rows = await sql(
+          `INSERT INTO animos (cargo, mood) VALUES ($1, $2) RETURNING *`,
+          [cargo || 'Sin área', mood]
         );
       }
       return res.status(200).json(rows[0]);
